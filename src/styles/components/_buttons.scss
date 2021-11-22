@@ -23,10 +23,6 @@ button {
     border: 1px solid $grey-100;
     box-shadow: none;
   }
-  &.disabled {
-    background-color: #d4d4d4;
-    pointer-events: none;
-  }
 }
 
 .radio-button {
