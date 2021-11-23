@@ -1,8 +1,16 @@
-const Todo = ({ todo }) => {
+const Todo = ({ todo, doneHandler }) => {
+  const handleRadioBtnClick = (e) => {
+    const todoId = e.target.parentElement.getAttribute('data-id');
+    doneHandler(todoId);
+  };
+
   return (
-    <li className="todo">
-      <button className="radio-button"></button>
-      <span>{todo}</span>
+    <li className="todo" data-id={todo.id}>
+      <button
+        className={`radio-button ${todo.done ? 'done' : ''}`}
+        onClick={handleRadioBtnClick}
+      ></button>
+      <span>{todo.task}</span>
       <button className="delete-button">
         <svg
           xmlns="http://www.w3.org/2000/svg"

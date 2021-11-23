@@ -1,27 +1,27 @@
 {
   "todos": [
     {
-      "todo": "Get up early in the morning",
+      "task": "Get up early in the morning",
       "id": "1",
-      "done": false
+      "done": true
     },
     {
-      "todo": "Brush your teeth",
+      "task": "Brush your teeth",
       "id": "2",
-      "done": false
+      "done": true
     },
     {
-      "todo": "Have your breakfast",
+      "task": "Have your breakfast",
       "id": "3",
-      "done": false
+      "done": true
     },
     {
-      "todo": "New todo",
-      "done": false,
+      "task": "New todo",
+      "done": true,
       "id": "h0hTphQ"
     },
     {
-      "todo": "New todo",
+      "task": "New todo",
       "done": false,
       "id": "SzU_ZdP"
     }

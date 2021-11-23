@@ -24,7 +24,6 @@ const MainContainer = () => {
           setIsPending(false);
           setTodos(data);
           setError(null);
-          console.log(data);
         })
         .catch((err) => {
           if (err.name === 'AbortError') {
@@ -37,6 +36,20 @@ const MainContainer = () => {
     }, 1000);
 
     return () => abortController.abort();
+  };
+  const updateData = (id, data) => {
+    fetch(`http://localhost:8080/todos/${id}`, {
+      method: 'Put',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then(() => {
+        fetchData('http://localhost:8080/todos');
+      })
+      .catch((e) => {
+        setError('Todo update failed');
+        console.log(e.message);
+      });
   };
 
   useEffect(() => {
@@ -53,13 +66,20 @@ const MainContainer = () => {
     });
   };
 
+  const handleTodoDone = (id) => {
+    console.log(id);
+    const todo = todos.filter((todo) => todo.id == id)[0];
+    todo.done = !todo.done;
+    updateData(id, todo);
+  };
+
   return (
     <>
       {isPending && <div>Loading...</div>}
       {error && <div>{error}</div>}
       <Header />
       <AddTodo handleAddTodo={handleAddTodo} />
-      {todos && <TodoContainer todos={todos} />}
+      {todos && <TodoContainer todos={todos} handleTodoDone={handleTodoDone} />}
       <Filter />
     </>
   );
