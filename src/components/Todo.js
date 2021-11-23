@@ -1,10 +1,8 @@
-const Todo = () => {
+const Todo = ({ todo }) => {
   return (
     <li className="todo">
       <button className="radio-button"></button>
-      <span>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum, amet.
-      </span>
+      <span>{todo}</span>
       <button className="delete-button">
         <svg
           xmlns="http://www.w3.org/2000/svg"

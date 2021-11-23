@@ -1,10 +1,12 @@
 import Todo from './Todo.js';
 
-const TodoContainer = () => {
+const TodoContainer = ({ todos }) => {
   return (
     <section className="todo-list">
       <ul>
-        <Todo />
+        {todos.map((todo) => (
+          <Todo todo={todo.todo} key={todo.id} />
+        ))}
       </ul>
     </section>
   );
