@@ -1,21 +1,14 @@
 import { useState } from 'react';
 
-const AddTodo = () => {
+const AddTodo = ({ handleAddTodo }) => {
   const [todo, setTodo] = useState('');
   const handleOnChange = (e) => {
     setTodo(e.target.value);
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const newTodo = { todo };
-
-    fetch('http://localhost:8080/todos', {
-      method: 'Post',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify(newTodo),
-    }).then(() => {
-      console.log('added todo');
-    });
+    const newTodo = { todo, done: false };
+    handleAddTodo(newTodo);
   };
   return (
     <section className="add-todo">
