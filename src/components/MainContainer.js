@@ -86,8 +86,8 @@ const MainContainer = () => {
 
   return (
     <>
-      {isPending && <div>Loading...</div>}
-      {error && <div>{error}</div>}
+      {isPending && <div className="toast">Loading Todos...</div>}
+      {error && <div className="toast error">{error}</div>}
       <Header />
       <AddTodo handleAddTodo={handleAddTodo} />
       {todos && (
