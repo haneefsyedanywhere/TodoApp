@@ -4,6 +4,11 @@
   max-height: 340px;
   overflow: auto;
   padding: 4px;
+  p {
+    margin: 0 auto;
+    max-width: 375px;
+    text-align: center;
+  }
 }
 
 .todo {
