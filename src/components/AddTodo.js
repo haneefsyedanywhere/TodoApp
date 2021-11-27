@@ -2,13 +2,30 @@ import { useState } from 'react';
 
 const AddTodo = ({ handleAddTodo }) => {
   const [todo, setTodo] = useState('');
+  const [error, setError] = useState(null);
+
+  const validateInput = (value) => {
+    if (value.length === 0) {
+      return { status: false, message: 'Please enter a non-empty todo' };
+    }
+  };
+
   const handleOnChange = (e) => {
+    if (error) {
+      e.target.value.length !== 0 ? setError(null) : '';
+    }
     setTodo(e.target.value);
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const newTodo = { todo, done: false };
-    handleAddTodo(newTodo);
+    let validation = validateInput(todo);
+    if (validation.status) {
+      setError(null);
+      const newTodo = { todo, done: false };
+      handleAddTodo(newTodo);
+    } else {
+      setError(validation.message);
+    }
   };
   return (
     <section className="add-todo">
@@ -20,6 +37,7 @@ const AddTodo = ({ handleAddTodo }) => {
           onChange={handleOnChange}
         />
         <button type="submit"> + </button>
+        {<p className="error-msg">{error}</p>}
       </form>
     </section>
   );

@@ -1,29 +1,3 @@
 {
-  "todos": [
-    {
-      "task": "Get up early in the morning",
-      "id": "1",
-      "done": true
-    },
-    {
-      "task": "Brush your teeth",
-      "id": "2",
-      "done": true
-    },
-    {
-      "task": "Have your breakfast",
-      "id": "3",
-      "done": true
-    },
-    {
-      "task": "New todo",
-      "done": true,
-      "id": "h0hTphQ"
-    },
-    {
-      "task": "New todo",
-      "done": false,
-      "id": "SzU_ZdP"
-    }
-  ]
+  "todos": []
 }

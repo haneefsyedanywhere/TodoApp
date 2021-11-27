@@ -8,6 +8,7 @@ const MainContainer = () => {
   const [todos, setTodos] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedFilter, setSelectedFilter] = useState('all');
 
   const fetchData = (url) => {
     const abortController = new AbortController();
@@ -83,7 +84,9 @@ const MainContainer = () => {
         console.error(err);
       });
   };
-
+  const handleSelectedFilter = (filterSelected) => {
+    setSelectedFilter(filterSelected);
+  };
   return (
     <>
       {isPending && <div className="toast">Loading Todos...</div>}
@@ -93,11 +96,12 @@ const MainContainer = () => {
       {todos && (
         <TodoContainer
           todos={todos}
+          selectedFilter={selectedFilter}
           handleTodoDone={handleTodoDone}
           handleDeleteTodo={handleDeleteTodo}
         />
       )}
-      <Filter />
+      <Filter handleSelectedFilter={handleSelectedFilter} />
     </>
   );
 };
