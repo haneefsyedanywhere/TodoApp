@@ -1,7 +1,10 @@
+import { useRef } from 'react';
+
 const Filter = ({ handleSelectedFilter }) => {
+  const filterBtnRef = useRef();
   const handleBtnClick = (e) => {
     let filterSelected = e.target.getAttribute('data-filter-type');
-    const filterBtns = [...document.querySelectorAll('.todo-filters button')];
+    const filterBtns = [...filterBtnRef.current.children];
     filterBtns.forEach((filterBtn) => {
       filterBtn.classList.remove('selected');
     });
@@ -9,7 +12,7 @@ const Filter = ({ handleSelectedFilter }) => {
     handleSelectedFilter(filterSelected);
   };
   return (
-    <section className="todo-filters">
+    <section className="todo-filters" ref={filterBtnRef}>
       <button
         className="btn-primary selected"
         data-filter-type="all"

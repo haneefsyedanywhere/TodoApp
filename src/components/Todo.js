@@ -15,7 +15,7 @@ const Todo = ({ todo, doneHandler, deleteHandler }) => {
         className={`radio-button ${todo.done ? 'done' : ''}`}
         onClick={handleRadioBtnClick}
       ></button>
-      <span>{todo.task}</span>
+      <span>{todo.todo}</span>
       <button className="delete-button" onClick={handleDeleteBtnClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

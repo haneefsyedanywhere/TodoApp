@@ -8,6 +8,7 @@ const AddTodo = ({ handleAddTodo }) => {
     if (value.length === 0) {
       return { status: false, message: 'Please enter a non-empty todo' };
     }
+    return { status: true };
   };
 
   const handleOnChange = (e) => {
@@ -19,9 +20,11 @@ const AddTodo = ({ handleAddTodo }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     let validation = validateInput(todo);
+
     if (validation.status) {
       setError(null);
       const newTodo = { todo, done: false };
+      setTodo('');
       handleAddTodo(newTodo);
     } else {
       setError(validation.message);
