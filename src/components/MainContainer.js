@@ -73,13 +73,30 @@ const MainContainer = () => {
     updateData(id, todo);
   };
 
+  const handleDeleteTodo = (id) => {
+    fetch(`http://localhost:8080/todos/${id}`, {
+      method: 'Delete',
+    })
+      .then(() => fetchData('http://localhost:8080/todos'))
+      .catch((err) => {
+        setError('Delete todo failed');
+        console.error(err);
+      });
+  };
+
   return (
     <>
       {isPending && <div>Loading...</div>}
       {error && <div>{error}</div>}
       <Header />
       <AddTodo handleAddTodo={handleAddTodo} />
-      {todos && <TodoContainer todos={todos} handleTodoDone={handleTodoDone} />}
+      {todos && (
+        <TodoContainer
+          todos={todos}
+          handleTodoDone={handleTodoDone}
+          handleDeleteTodo={handleDeleteTodo}
+        />
+      )}
       <Filter />
     </>
   );

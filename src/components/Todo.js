@@ -1,9 +1,14 @@
-const Todo = ({ todo, doneHandler }) => {
+const Todo = ({ todo, doneHandler, deleteHandler }) => {
   const handleRadioBtnClick = (e) => {
     const todoId = e.target.parentElement.getAttribute('data-id');
     doneHandler(todoId);
   };
 
+  const handleDeleteBtnClick = (e) => {
+    const todoId = e.currentTarget.parentElement.getAttribute('data-id');
+    console.log(todoId);
+    deleteHandler(todoId);
+  };
   return (
     <li className="todo" data-id={todo.id}>
       <button
@@ -11,11 +16,11 @@ const Todo = ({ todo, doneHandler }) => {
         onClick={handleRadioBtnClick}
       ></button>
       <span>{todo.task}</span>
-      <button className="delete-button">
+      <button className="delete-button" onClick={handleDeleteBtnClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="15"
+          width="16"
+          height="16"
           viewBox="0 0 18 15"
           fill="none"
         >
