@@ -6,15 +6,23 @@ const TodoContainer = ({
   handleTodoDone,
   handleDeleteTodo,
 }) => {
-  let todosToRender;
-  if (selectedFilter == 'all') {
+  let todosToRender = [];
+  if (selectedFilter === 'all') {
     todosToRender = todos;
   } else if (selectedFilter === 'active') {
     todosToRender = todos.filter((todo) => todo.done === false);
   } else if (selectedFilter === 'completed') {
     todosToRender = todos.filter((todo) => todo.done === true);
   }
-
+  const EmptyTodos = () => {
+    if (todos.length === 0 || selectedFilter === 'all') {
+      return <p>No todos present, please add todos!</p>;
+    } else if (selectedFilter === 'active') {
+      return <p>Hurray, all todos completed!</p>;
+    } else if (selectedFilter === 'completed') {
+      return <p>No completed todos present, please complete active todos!</p>;
+    }
+  };
   return (
     <section className="todo-list">
       <ul>
@@ -27,6 +35,7 @@ const TodoContainer = ({
           />
         ))}
       </ul>
+      {todosToRender.length === 0 && <EmptyTodos />}
     </section>
   );
 };
