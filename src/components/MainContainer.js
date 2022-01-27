@@ -4,6 +4,8 @@ import TodoContainer from './TodoContainer.js';
 import Filter from './Filter';
 import { useState, useEffect } from 'react';
 
+const DOMAIN = 'https://jsonplaceholder.typicode.com';
+
 const MainContainer = () => {
   const [todos, setTodos] = useState(null);
   const [isPending, setIsPending] = useState(true);
@@ -12,40 +14,38 @@ const MainContainer = () => {
 
   const fetchData = (url) => {
     const abortController = new AbortController();
-    setTimeout(() => {
-      fetch(url, { signal: abortController.signal })
-        .then((res) => {
-          if (!res.ok) {
-            // error coming back from server
-            throw Error('could not fetch the data for that resource');
-          }
-          return res.json();
-        })
-        .then((data) => {
+    fetch(url, { signal: abortController.signal })
+      .then((res) => {
+        if (!res.ok) {
+          // error coming back from server
+          throw Error('could not fetch the data for that resource');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setIsPending(false);
+        setTodos(data);
+        setError(null);
+      })
+      .catch((err) => {
+        if (err.name === 'AbortError') {
+          console.log('Fetch Aborted!');
+        } else {
           setIsPending(false);
-          setTodos(data);
-          setError(null);
-        })
-        .catch((err) => {
-          if (err.name === 'AbortError') {
-            console.log('Fetch Aborted!');
-          } else {
-            setIsPending(false);
-            setError(err.message);
-          }
-        });
-    }, 1000);
+          setError(err.message);
+        }
+      });
 
     return () => abortController.abort();
   };
   const updateData = (id, data) => {
-    fetch(`http://localhost:8080/todos/${id}`, {
+    fetch(`${DOMAIN}/todos/${id}`, {
       method: 'Put',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(data),
     })
       .then(() => {
-        fetchData('http://localhost:8080/todos');
+        fetchData(`${DOMAIN}/todos`);
       })
       .catch((e) => {
         setError('Todo update failed');
@@ -54,16 +54,16 @@ const MainContainer = () => {
   };
 
   useEffect(() => {
-    fetchData('http://localhost:8080/todos');
+    fetchData(`${DOMAIN}/todos`);
   }, []);
 
   const handleAddTodo = (newTodo) => {
-    fetch('http://localhost:8080/todos', {
+    fetch(`${DOMAIN}/todos`, {
       method: 'Post',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(newTodo),
     }).then(() => {
-      fetchData('http://localhost:8080/todos');
+      fetchData(`${DOMAIN}/todos`);
     });
   };
 
@@ -75,10 +75,10 @@ const MainContainer = () => {
   };
 
   const handleDeleteTodo = (id) => {
-    fetch(`http://localhost:8080/todos/${id}`, {
+    fetch(`${DOMAIN}/todos/${id}`, {
       method: 'Delete',
     })
-      .then(() => fetchData('http://localhost:8080/todos'))
+      .then(() => fetchData(`${DOMAIN}/todos`))
       .catch((err) => {
         setError('Delete todo failed');
         console.error(err);

@@ -3,7 +3,6 @@ const Todo = ({ todo, doneHandler, deleteHandler }) => {
     const todoId = e.target.parentElement.getAttribute('data-id');
     doneHandler(todoId);
   };
-
   const handleDeleteBtnClick = (e) => {
     const todoId = e.currentTarget.parentElement.getAttribute('data-id');
     console.log(todoId);
@@ -12,10 +11,10 @@ const Todo = ({ todo, doneHandler, deleteHandler }) => {
   return (
     <li className="todo" data-id={todo.id}>
       <button
-        className={`radio-button ${todo.done ? 'done' : ''}`}
+        className={`radio-button ${todo.completed ? 'done' : ''}`}
         onClick={handleRadioBtnClick}
       ></button>
-      <span>{todo.todo}</span>
+      <span>{todo.title}</span>
       <button className="delete-button" onClick={handleDeleteBtnClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -23,7 +23,7 @@ const AddTodo = ({ handleAddTodo }) => {
 
     if (validation.status) {
       setError(null);
-      const newTodo = { todo, done: false };
+      const newTodo = { title: todo, completed: false, userId: 1 };
       setTodo('');
       handleAddTodo(newTodo);
     } else {
