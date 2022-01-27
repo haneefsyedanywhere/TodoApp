@@ -1,13 +1,13 @@
-const Todo = ({ todo, doneHandler, deleteHandler }) => {
+const Todo = ({ todo, doneHandler }) => {
   const handleRadioBtnClick = (e) => {
     const todoId = e.target.parentElement.getAttribute('data-id');
     doneHandler(todoId);
   };
-  const handleDeleteBtnClick = (e) => {
-    const todoId = e.currentTarget.parentElement.getAttribute('data-id');
-    console.log(todoId);
-    deleteHandler(todoId);
-  };
+  // const handleDeleteBtnClick = (e) => {
+  //   const todoId = e.currentTarget.parentElement.getAttribute('data-id');
+  //   console.log(todoId);
+  //   deleteHandler(todoId);
+  // };
   return (
     <li className="todo" data-id={todo.id}>
       <button
@@ -15,7 +15,7 @@ const Todo = ({ todo, doneHandler, deleteHandler }) => {
         onClick={handleRadioBtnClick}
       ></button>
       <span>{todo.title}</span>
-      <button className="delete-button" onClick={handleDeleteBtnClick}>
+      {/* <button className="delete-button" onClick={handleDeleteBtnClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -30,7 +30,7 @@ const Todo = ({ todo, doneHandler, deleteHandler }) => {
             fill="#dd2727"
           />
         </svg>
-      </button>
+      </button> */}
     </li>
   );
 };

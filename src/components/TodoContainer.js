@@ -10,9 +10,9 @@ const TodoContainer = ({
   if (selectedFilter === 'all') {
     todosToRender = todos;
   } else if (selectedFilter === 'active') {
-    todosToRender = todos.filter((todo) => todo.done === false);
+    todosToRender = todos.filter((todo) => todo.completed === false);
   } else if (selectedFilter === 'completed') {
-    todosToRender = todos.filter((todo) => todo.done === true);
+    todosToRender = todos.filter((todo) => todo.completed === true);
   }
   const EmptyTodos = () => {
     if (todos.length === 0 || selectedFilter === 'all') {
